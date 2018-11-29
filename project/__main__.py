@@ -1,7 +1,7 @@
 import sys
 
-from lib import Project
-from lib import Options
+from .lib.project import Project
+from .lib.options import Options
 
 def run_project(args):
     options = Options()
@@ -9,8 +9,8 @@ def run_project(args):
 
     project = Project(options)
 
-    print 'Printing date:', project.date()
-    print 'Printing example arg:', project.print_example_arg()
+    print('Printing date: ', project.verify())
+    print('Printing example arg: ', project.print_example_arg())
 
 if __name__ == '__main__':
     run_project(sys.argv)
