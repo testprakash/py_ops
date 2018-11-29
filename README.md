@@ -36,5 +36,6 @@ The purpose of dversion project is to update version in pom file. According to f
 
 ### Testing 
 ```
+  pip install -r test/requirements.txt 
   ./bin/run_tests
 ```
