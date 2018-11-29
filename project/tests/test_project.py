@@ -5,6 +5,8 @@ from mockito import mock, when, verify
 
 from ..lib.project import Project
 from ..lib.options import Options
+import os
+from shutil import copyfile
 
 class TestProject(unittest.TestCase):
 
@@ -12,19 +14,16 @@ class TestProject(unittest.TestCase):
         if optional is None:
             optional = []
         options = Options()
-        options.parse(['-o', 'ghorg', '-b', 'branch'] + optional)
+        options.parse(['-o', 'org', '-b', 'branch'] + optional)
         return options
 
     def setUp(self):
         self.project = Project(self._default_options([]))
-        # mocked_process = mock()
-        # when(mocked_process).execute('date').thenReturn("The date might be: "\
-        #                                                     +self.project.process.execute("date").strip('\n')\
-        #                                                     +"\nbut we could also overwrite it to be the"\
-        #                                                     +" 1st of April instead.")
-        # overwriting project's process.execute('date') with the mock function above
-        # just an example of overwriting a dependency when testing
-        # self.project.process = mocked_process
+        self.test_dir = os.path.dirname(os.path.abspath(__file__))
+        self.tmp_dir = self.test_dir + '/tmp'
+        if not os.path.exists(self.tmp_dir):
+            os.mkdir(self.tmp_dir)
+        self.src_pom = self.test_dir +  '/resources/pom.xml'
 
     def test_verify_should_fail_if_invalid_file_is_passed(self):
         self.project = Project(self._default_options(['--pom', '/tmp/not_existing.xml']))
@@ -34,15 +33,38 @@ class TestProject(unittest.TestCase):
         except AssertionError:
             pass
 
+        self.project = Project(self._default_options(['--pom', self.test_dir + '/resources/no_version_tag_pom.xml']))
+        try:
+            self.project.verify()
+            self.assertFalse("Required parameters missing but test passed")
+        except AssertionError:
+            pass
 
-    #
-    # def test_project_should_fail_if_file_is_invalid(self):
-    #     self.assertTrue('1st of April' in self.project.process.execute('date'))
-    #     verify(self.project.process).execute('date')
-    #
-    # def test_project_should_get_date(self):
-    #     self.assertTrue('1st of April' in self.project.process.execute('date'))
-    #     verify(self.project.process).execute('date')
+    def test_verify_getting_snapshot_version(self):
+        version = self.project.get_version(self.src_pom)
+        self.assertEquals(version.text, '1.0-SNAPSHOT')
+
+    def test_get_new_snapshot_version(self):
+        new_version = self.project.get_new_snapshot_version('org', 'branch')
+        self.assertEquals(new_version, 'ci_org_branch-SNAPSHOT')
+
+    def test_change_version(self):
+        tmp_pom = self.tmp_dir + '/pom.xml'
+        copyfile(self.src_pom, tmp_pom)
+
+        self.project = Project(self._default_options(['--pom', tmp_pom]))
+
+        # assert we started with 1.0-SNAPSHOT version
+        version = self.project.get_version(tmp_pom)
+        self.assertEquals(version.text, '1.0-SNAPSHOT')
+
+        # when
+        self.project.update_version()
+
+        version = self.project.get_version(tmp_pom)
+        self.assertEquals(version.text, 'ci_org_branch-SNAPSHOT')
+
+
 
 if __name__ == '__main__':
     unittest.main()

@@ -10,7 +10,15 @@ def run_project(args):
     project = Project(options)
 
     project.verify()
-    print('Pom file has valid syntax')
+    #print('Pom file has valid syntax')
+
+    project.assert_version_snapshot()
+
+    #print('snapshot version')
+
+    project.update_version()
+
+    #print('update completed')
 
 if __name__ == '__main__':
     run_project(sys.argv)

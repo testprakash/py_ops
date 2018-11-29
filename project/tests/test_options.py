@@ -19,7 +19,7 @@ class TestCommandLineParameters(unittest.TestCase):
         self.parse([])
         self.assertEquals(self.options.known.pom, '/tmp/pom.xml')
 
-    def test_set_options_example(self):
+    def test_set_options(self):
         self.parse(['-p', '/opt/pom.xml'])
         self.assertEquals(self.options.known.pom, '/opt/pom.xml')
         self.parse(['--pom', '/abc/pom.xml'])

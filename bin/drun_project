@@ -1,0 +1,7 @@
+cd `dirname $0`/..
+pom_file="$1"
+shift
+
+# pom file should a full path
+docker run -v $pom_file:/tmp/pom.xml -it dversion_dversion  $*
+

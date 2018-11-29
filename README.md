@@ -16,11 +16,13 @@ The purpose of dversion project is to update version in pom file. According to f
 
 ## With docker
 
+Build first:
+    docker-compose build
 ### Running
 
-    docker-compose build
-    docker-compose run dversion <command line arguments>
-    docker run -it dversion_dversion
+   * using docker 
+     ./bin/drun_project `pwd`/tpom.xml -o org -b branch 
+      
 ### Testing
 
     docker-compose run test
@@ -31,7 +33,15 @@ The purpose of dversion project is to update version in pom file. According to f
 ###  Running 
 
 ```
-  ./bin/run_project --org github_org --branch branchName --pom pom.xml
+  cp pom.xml tpom.xml # top keep original file intact
+
+  ./bin/run_project --org github_org --branch branchName --pom tpom.xml
+
+   #  or directly 
+
+  python -m project --pom tpom.xml -o org -b branch
+
+  diff pom.xml tpom.xml # to see difference 
 ```
 
 ### Testing 

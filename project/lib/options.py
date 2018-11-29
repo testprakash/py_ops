@@ -27,7 +27,7 @@ class Options:
 
         self.parser.add_argument('-b',
                                  '--branch',
-                                 dest='git branch', # determines the name of the attribute that parse_args yields
+                                 dest='branch', # determines the name of the attribute that parse_args yields
                                  required=True,
                                  help='Github branch name') # specifies help message
 

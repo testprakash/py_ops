@@ -1,3 +1,6 @@
 .DS_Store
 .idea
 *.pyc
+tmp/
+tpom.xml
+target/
