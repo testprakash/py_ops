@@ -42,4 +42,4 @@ ENV MAVEN_OPTS "-Djavax.net.ssl.trustStorePassword=changeit"
 #RUN echo -Djavax.net.ssl.trustStorePassword=changeit >  .mvn/jvm.config
 ENV PYTHONUNBUFFERED 0
 ENV PYTHONPATH /usr/src/app/project:/usr/src/app/project/lib
-#ENTRYPOINT [ "python", "-m", "project" ]
+ENTRYPOINT [ "python", "-m", "project" ]
