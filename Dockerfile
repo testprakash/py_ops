@@ -48,6 +48,6 @@ WORKDIR /usr/src/app
 COPY . /usr/src/app
 
 # this is just for quick testing 
-ADD pom.xml /tmp/
+# ADD pom.xml /tmp/
 
-# ENTRYPOINT [ "python", "project" ]
+ENTRYPOINT [ "python", "project" ]
