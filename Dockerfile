@@ -49,5 +49,6 @@ COPY . /usr/src/app
 
 # this is just for quick testing 
 # ADD pom.xml /tmp/
-
-ENTRYPOINT [ "python", "project" ]
+ENV PYTHONUNBUFFERED 0
+ENV PYTHONPATH /usr/src/app/project:/usr/src/app/project/lib
+ENTRYPOINT [ "python", "-m", "project" ]

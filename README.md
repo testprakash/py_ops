@@ -29,7 +29,7 @@ The purpose of dversion project is to update version in pom file. According to f
 ###  Running 
 
 ```
-  ./bin/run_project
+  ./bin/run_project --org github_org --branch branchName --pom pom.xml
 ```
 
 ### Testing 

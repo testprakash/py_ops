@@ -9,8 +9,8 @@ def run_project(args):
 
     project = Project(options)
 
-    print('Printing date: ', project.verify())
-    print('Printing example arg: ', project.print_example_arg())
+    project.verify()
+    print('Pom file has valid syntax')
 
 if __name__ == '__main__':
     run_project(sys.argv)
