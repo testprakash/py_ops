@@ -1,0 +1,5 @@
+cd `dirname $0`/..
+export PYTHONPATH=`pwd`/project/lib:`pwd`/project
+echo $PYTHONPATH
+pwd
+python -m project

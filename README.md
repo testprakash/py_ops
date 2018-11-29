@@ -1,6 +1,6 @@
 ## Introduction
 
-The purpose of dversionproject is to update version in pom file. According to following requirements:
+The purpose of dversion project is to update version in pom file. According to following requirements:
  * It must validate the pom is syntactically correct
  * It must confirm the version is a snapshot prior to making any changes
  * The resulting pom version needs to match this format `ci_{git hub org name here}_{branch name here}-SNAPSHOT`
@@ -10,18 +10,28 @@ The purpose of dversionproject is to update version in pom file. According to fo
 
 * [docker](https://www.docker.com/)
 
-## Running the Application
+
+## With docker
+
+### Running
 
     docker-compose build
     docker-compose run project <command line arguments>
 
-## Testing
+### Testing
 
     docker-compose run test
 
 
-## Running tests manualy
+## Without docker
 
-cd dversion 
-python -m tests
+###  Running 
 
+```
+  ./bin/run_project
+```
+
+### Testing 
+```
+  ./bin/run_tests
+```
