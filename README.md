@@ -9,7 +9,9 @@ The purpose of dversion project is to update version in pom file. According to f
 
 ## Prerequisites
 
-* [docker](https://www.docker.com/)
+* [docker](https://docs.docker.com/install/)
+
+* [docker-compose](https://docs.docker.com/compose/install/)
 
 
 ## With docker
@@ -17,8 +19,8 @@ The purpose of dversion project is to update version in pom file. According to f
 ### Running
 
     docker-compose build
-    docker-compose run project <command line arguments>
-
+    docker-compose run dversion_dversion <command line arguments>
+    docker run -it dversion_dversion
 ### Testing
 
     docker-compose run test
